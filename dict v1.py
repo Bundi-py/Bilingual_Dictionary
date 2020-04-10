@@ -1,26 +1,52 @@
 import csv
 
 with open('c:/FAJLOVI/Python_School/CodingNomads/dict/dict2.csv', newline = '', encoding = 'utf-8') as csvfile:
-    reader = csv.reader(csvfile)
+    reader = csv.reader(csvfile, delimiter='=')
     mydict = {rows[0]:rows[1] for rows in reader}
-    
-#Adding a new Pali word to the Dictionary
-add_pali = input('To add a new Pali word, type it here: ')
-add_serbian = input('Now type its meaning in Serbian: ')
-mydict[add_pali] = [add_serbian]
-print('Done!')
 
 #Search a Pali word in the Dictionary
-search = input('Search for Pali word: ')
-print('This Pali word in Serbian means the following: ', mydict[search])
+def searching(search):
+    print('This Pali word in Serbian means: ', mydict[search])
+    return
+
+#Adding a new Pali word to the Dictionary
+def adding(add_pali, add_serbian):
+    mydict[add_pali] = add_serbian
+    print('Done!')
 
 #Correcting a Pali word in the Dictionary
-error = input('Type Pali word to be corrected: ')
-correction = input('Type correct version of the Pali word: ')
-mydict[error] = [correction]
-print('Corrected!', mydict[correction])
+def correcting(error, correction):
+    x = mydict.get(error)
+    if x:
+        mydict[correction] = mydict[error]
+        del mydict[error]
+        print(f'{error} replaced with {correction}')
+    else:
+        print(f'{error} is not in the dictionary')
 
-#Writing ne status of the Dictionary
+ans = True
+while ans:
+    print ("""
+    1. Look Up Pali word
+    2. Add a Pali word
+    3. Correct a Pali word
+    4. Exit/Quit
+    """)
+    ans = input("What would you like to do? ") 
+    if ans == "1": 
+        searching(input('Search for Pali word: '))
+    elif ans == "2":
+      adding(input('To add a new Pali word, type it here: '), input('Now type its meaning in Serbian: '))
+    elif ans == "3": 
+      correcting(input('Type Pali word to be corrected: '), input('Type correct version of the Pali word: '))
+    elif ans == "4":
+      print("\n Goodbye")
+      break
+    elif ans != "":
+      print("\n Not Valid Choice Try again")     
+
+
+#Writing new status of the Dictionary
 with open('dict_new.csv', mode='w', encoding = 'utf-8') as outfile:
     writer = csv.writer(outfile)
     writer.writerows(mydict)
