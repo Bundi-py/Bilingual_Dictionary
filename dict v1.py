@@ -1,7 +1,7 @@
 import csv
 
-with open('c:/FAJLOVI/Python_School/CodingNomads/dict/dict2.csv', newline = '', encoding = 'utf-8') as csvfile:
-    reader = csv.reader(csvfile, delimiter='=')
+with open('c:/FAJLOVI/Python_School/CodingNomads/dict/dict_new.csv', newline = '', encoding = 'utf-8') as csvfile:
+    reader = csv.reader(csvfile)
     mydict = {rows[0]:rows[1] for rows in reader}
 
 #Search a Pali word in the Dictionary
@@ -47,8 +47,9 @@ while ans:
 
 
 #Writing new status of the Dictionary
-with open('dict_new.csv', mode='w', encoding = 'utf-8') as outfile:
+with open('dict_new.csv', mode='w', encoding = 'utf-8', newline = '') as outfile:
     writer = csv.writer(outfile)
-    writer.writerows(mydict)
+    for i in mydict.items():
+        writer.writerow(i)
 
 print("Writing complete")
