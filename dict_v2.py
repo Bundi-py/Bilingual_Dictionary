@@ -13,7 +13,7 @@ with open(path_sp, newline='', encoding='utf-8') as csvfile_sp:
 
 
 def mainMenu():
-    print('''Welcome to the CodingNomads Dictionary:
+    print('''Welcome to the CodingNomads Dictionary!:
             1. Pali-Serbian
             2. Serbian-Pali
             3. Quit''')
